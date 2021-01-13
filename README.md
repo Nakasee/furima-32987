@@ -1,20 +1,19 @@
 ## users テーブル
 
-| Column              | Type      | Options     |
-| ------------------- | --------- | ------------|
-| nickname            | string    | null: false |
-| email               | string    | null: false |
-| encrypted_password  | string    | null: false |
-| family_name         | string    | null: false |
-| first_name          | string    | null: false |
-| family_name_kana    | string    | null: false |
-| first_name_kana     | string    | null: false |
-| birthday            | date      | null: false |
+| Column              | Type      | Options      |
+| ------------------- | --------- | ------------ |
+| nickname            | string    | null: false  |
+| email               | string    | unique: true |
+| encrypted_password  | string    | null: false  |
+| family_name         | string    | null: false  |
+| first_name          | string    | null: false  |
+| family_name_kana    | string    | null: false  |
+| first_name_kana     | string    | null: false  |
+| birthday            | date      | null: false  |
 
 ### Association
 - has_many :items
 - has_many :comments through: :items
-- has_many : byers
 - has_one : order
 
 
@@ -35,7 +34,6 @@
 ### Association
 - has_many :comments
 - belongs_to :user
-- has_one : byer
 - has_one : order
 
 
@@ -64,9 +62,7 @@
 | order             | references |  foreign_key: true  |
 
 ### Association
-- belongs_to :user
-- belongs_to :item
-- has_one :oder
+- belongs_to :order
 
 ## orders テーブル
 
@@ -75,6 +71,7 @@
 | user        | references |  foreign_key: true  |
 | item        | references |  foreign_key: true  |
 
+### Association
 - belongs_to :user
 - belongs_to :item
-- belongs_to :buyers
+- has_one :buyer

@@ -14,8 +14,8 @@
 ### Association
 - has_many :items
 - has_many :comments through: :items
-- has_one : byers
-- has_one : cards
+- has_many : byers
+- has_one : order
 
 
 ## items テーブル
@@ -35,8 +35,8 @@
 ### Association
 - has_many :comments
 - belongs_to :user
-- has_one : byers
-- has_one : cards
+- has_one : byer
+- has_one : order
 
 
 ## comments テーブル
@@ -59,21 +59,22 @@
 | prefecture_id     | integer    | null: false         |
 | city              | string     | null: false         |
 | address           | string     | null: false         |
-| building_name     | integer    | null: true          |
+| building_name     | string     |                     |
 | phone_number      | string     | null: false         |
-| user              | references |  foreign_key: true  |
-| item              | references |  foreign_key: true  |
+| order             | references |  foreign_key: true  |
 
 ### Association
 - belongs_to :user
 - belongs_to :item
+- has_one :oder
 
-## cards テーブル
+## orders テーブル
 
 | Column      | Type       | Options             |
 | ----------- | ---------- | --------------------|
-| user_id     | references |  foreign_key: true  |
-| item_id     | references |  foreign_key: true  |
+| user        | references |  foreign_key: true  |
+| item        | references |  foreign_key: true  |
 
 - belongs_to :user
 - belongs_to :item
+- belongs_to :buyers

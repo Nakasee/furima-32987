@@ -5,18 +5,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  with_options presence: true, format: {with: /\A[ぁ-んァ-ヶ一-龥々]+\z/ } do
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/ } do
     validates :family_name
     validates :first_name
   end
 
-  with_options presence: true, format: {with: /\A[ァ-ヶ]+\z/} do
-  validates :family_name_kana
-  validates :first_name_kana
+  with_options presence: true, format: { with: /\A[ァ-ヶ]+\z/ } do
+    validates :family_name_kana
+    validates :first_name_kana
   end
 
   validates :birthday, presence: true
-  
-  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])\w{6,12}\z/ }
-  
+
+  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)\w{6,12}\z/ }
 end

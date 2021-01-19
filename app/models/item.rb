@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   belongs_to :cost
   belongs_to :prefecture
   belongs_to :day
+  has_one_attached :image
   
   extend ActiveHash::Associations::ActiveRecordExtensions
   with_options presence: true do

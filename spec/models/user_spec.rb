@@ -71,12 +71,12 @@ RSpec.describe User, type: :model do
     it 'ユーザー本名は名字が全角である事' do
       @user.family_name = 'yamada'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Family name is invalid")
+      expect(@user.errors.full_messages).to include('Family name is invalid')
     end
     it 'ユーザー本名は名前が全角である事' do
       @user.first_name = 'tarou'
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name is invalid")
+      expect(@user.errors.full_messages).to include('First name is invalid')
     end
     it 'ユーザー本名のフリガナは名字が必須である事' do
       @user.family_name_kana = ''

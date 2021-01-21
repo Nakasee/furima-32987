@@ -22,4 +22,5 @@ class User < ApplicationRecord
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i }
 
   has_many :items
+  has_many :comments
 end

@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :contributor_confirmation, only: [:edit, :update]
   before_action :set_item, only: [:show, :edit, :update]
+  before_action :contributor_confirmation, only: [:edit, :update]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -44,11 +44,12 @@ class ItemsController < ApplicationController
                                  :day_id).merge(user_id: current_user.id)
   end
 
-  def contributor_confirmation
-    redirect_to root_path(current_user) unless Item.find(params[:id]).user.id == current_user.id
-  end
-
   def set_item
     @item = Item.find(params[:id])
   end
+
+  def contributor_confirmation
+    redirect_to root_path unless @item.user.id == current_user.id
+  end
+
 end

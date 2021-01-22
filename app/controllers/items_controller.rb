@@ -56,5 +56,4 @@ class ItemsController < ApplicationController
   def contributor_confirmation
     redirect_to root_path unless @item.user.id == current_user.id
   end
-
 end

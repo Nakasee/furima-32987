@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
 
   def create
     @item_buyer = ItemBuyer.new(order_params)
-    # binding.pry
     if @item_buyer.valid?
       pay_item
       @item_buyer.save

@@ -1,6 +1,6 @@
 class ItemBuyer
   include ActiveModel::Model
-  attr_accessor :post_code, :prefecture_id, :city, :address, :building_name, :phone_number, :item_id, :user_id, :order_id
+  attr_accessor :token, :post_code, :prefecture_id, :city, :address, :building_name, :phone_number, :item_id, :user_id, :order_id
 
   with_options presence: true do
     validates :city, :address
@@ -11,7 +11,7 @@ class ItemBuyer
     end
     validates :user_id
     validates :item_id
-    
+    validates :token
 
   end
 

@@ -13,7 +13,6 @@ RSpec.describe Order, type: :model do
     end
     context '商品出品がうまくいかないとき' do
       it '' do
-        
       end
     end
   end

@@ -2,13 +2,25 @@ require 'rails_helper'
 
 RSpec.describe ItemBuyer, type: :model do
   before do
-    @item_buyer = FactoryBot.build(:item_buyer)
+    
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item, user_id: user.id)
+    @item_buyer = FactoryBot.build(:item_buyer, item_id: item.id, user_id: user.id)
+    sleep 0.1
   end
 
   describe '商品購入機能' do
-    it '全ての項目が入力されていれば購入ができる' do
-      expect(@item_buyer).to be_valid
+    context '購入者情報の登録ができる場合' do
+      it '記入欄全てが正しく存在すれば記録できる' do
+        expect(@item_buyer).to be_valid
+      end
+
+      it 'building_nameは空でも保存できること' do
+        @item_buyer.building_name = ''
+        expect(@item_buyer).to be_valid
+      end
     end
+    context '購入者情報がうまく登録できない場合'do
     it 'token(クレジットカード情報)が空だと購入ができない' do
       @item_buyer.token = nil
       @item_buyer.valid?
@@ -54,5 +66,21 @@ RSpec.describe ItemBuyer, type: :model do
       @item_buyer.valid?
       expect(@item_buyer.errors.full_messages).to include('Phone number is invalid')
     end
+    it 'phone_numberが英字混合では購入できない' do
+      @item_buyer.phone_number = '080abcd6789'
+      @item_buyer.valid?
+      expect(@item_buyer.errors.full_messages).to include('Phone number is invalid')
+    end
+    it 'user_idが空では登録できない' do
+      @item_buyer.user_id =''
+      @item_buyer.valid?
+      expect(@item_buyer.errors.full_messages).to include("User can't be blank")
+    end
+    it 'item_idが空では登録できない' do
+      @item_buyer.item_id =''
+      @item_buyer.valid?
+      expect(@item_buyer.errors.full_messages).to include("Item can't be blank")
+    end
+   end
   end
 end
